@@ -1,0 +1,6 @@
+h 1 p
+h 3 q
+v 2 c
+h 2 b
+v 1 a
+v 3 z

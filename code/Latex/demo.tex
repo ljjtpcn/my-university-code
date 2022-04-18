@@ -1,0 +1,43 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[UTF8]{ctex}
+
+%这是文章的标题
+\title{LaTex 常用模板}
+%这是文章的作者
+\author{Kevin}
+%这是文章的时间
+%如果没有这行将显示当前时间
+%如果不想显示时间则使用 \date{}
+\date{2008/10/12}
+%以上部分叫做"导言区",下面才开始写正文
+\begin{document}
+
+%先插入标题
+\maketitle     %主要的作用是用于生成标题的作用 content contain \title \author \date
+%再插入目录
+\tableofcontents   %主要的作用适用于生成目录的作用
+\section{LaTex 简介}
+LaTex是一个宏包,目的是使作者能够利用一个
+预先定义好的专业页面设置,
+从而得以高质量的排版和打印他们的作品.
+%第二段使用黑体,上面的一个空行表示另起一段
+\CJKfamily{hei}LaTex 将空格和制表符视为相同的距离.
+多个连续的空白字符 等同为一个空白字符
+\section{LaTex源文件}
+%在第二段我们使用隶书
+\CJKfamily{li}LaTex 源文件格式为普通的ASCII文件,
+你可以使用任何文本编辑器来创建.
+LaTex源文件不仅包括你要排版的文本, 还包括LaTex
+所能识别的,如何排版这些文本的命令.
+\section{结论}
+%在结论部分我们使用仿宋体
+\CJKfamily{fs}LaTeX, 我看行! $a_{i, j}$
+
+$\overbrace{1+2+\cdots+100}$
+
+
+\end{document}
+\documentclass{article}
+\usepackage{CJK}
+ 
+

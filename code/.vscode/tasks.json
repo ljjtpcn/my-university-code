@@ -1,0 +1,31 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build", //与launch.json中"preLaunchTask": "build",一致
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-g",
+                "${fileDirname}/**cpp", //单个、多个cpp文件都可以
+                "-o",
+                "${workspaceRoot}/OUT/${fileBasenameNoExtension}.out", //与launch.json的"program"对应
+                "-std=c++17" //c++版本
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        //"panel": "shared",
+        //"showReuseMessage": true,
+        //"clear": false
+    }
+}
