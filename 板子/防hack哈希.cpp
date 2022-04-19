@@ -13,3 +13,4 @@ struct custom_hash {
 	}
 };
 unordered_map<uint64_t, int, custom_hash> safe_map;
+// good
