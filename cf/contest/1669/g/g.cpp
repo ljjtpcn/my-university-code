@@ -17,10 +17,34 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int N = 2e5 + 10;
+const int N = 50 + 10;
 
+string s[N];
 void solve() {
-    
+    int n, m;
+    read(n), read(m);
+    for(int i = 0; i < n; i ++) cin >> s[i];
+
+    for(int j = 0; j < m; j ++){
+        int cnt = 0;
+        for(int i = 0; i < n; i ++){
+            if(s[i][j] == 'o' || i == n - 1){
+                for(int k = s[i][j] == '.' ? i : i - 1; cnt > 0; cnt --, k --){
+                    s[k][j] = '*';
+                }
+            }else if(s[i][j] == '*'){
+                cnt ++;
+                s[i][j] = '.';
+            }
+        }
+    }
+    for(int i = 0; i < n; i ++){
+        for(int j = 0; j < m; j ++){
+            cout << s[i][j];
+        }
+        cout << endl;
+    }
+    cout << endl;
 }
 
 int main() {

@@ -6,21 +6,32 @@
 #define sec sec
 using namespace std;
 // clang-format off
+struct node { int x, y, cnt; };
+struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 typedef long long ll;
 typedef unsigned long long ull;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
-inline void read(int &num) {int s = 0;char ch = getchar();while (ch < '0' || ch > '9') ch = getchar();while (ch >= '0' && ch <= '9')s = (s << 3) + (s << 1) + ch - '0', ch = getchar();num = s;}
-inline void read(ll &num) {ll s = 0;char ch = getchar();while (ch < '0' || ch > '9') ch = getchar();while (ch >= '0' && ch <= '9')s = (s << 3) + (s << 1) + ch - '0', ch = getchar();num = s;}
+
+const int mod = 1e9 + 7;
 ll ksm(ll a, ll b){ll res = 1;while(b){if(b & 1)res *= a;a *= a;b >>= 1;}return res;}
 ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a = a * a % mod;b >>= 1;}return res;}
-struct node { int x, y, cnt; };
-struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
+
 const int N = 2e5 + 10;
 
 void solve() {
-    
+    ll n;
+    cin >> n;
+    if(n <= 1399){
+        cout << "Division 4\n";
+    }else if(n <= 1599){
+        cout << "Division 3\n";
+    }else if(n <= 1899){
+        cout << "Division 2\n";
+    }else {
+        cout << "Division 1\n";
+    }
 }
 
 int main() {

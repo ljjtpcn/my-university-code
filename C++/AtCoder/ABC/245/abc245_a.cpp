@@ -1,3 +1,8 @@
+// Problem: A - Good morning
+// Contest: AtCoder - AtCoder Beginner Contest 245
+// URL: https://atcoder.jp/contests/abc245/tasks/abc245_a
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -20,12 +25,24 @@ struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 const int N = 2e5 + 10;
 
 void solve() {
-    
+    int a, b, c, d;
+    cin >> a >> b >> c >> d;
+    if (a < c) {
+        cout << "Takahashi";
+    } else if (a == c) {
+        if (b <= d) {
+            cout << "Takahashi";
+        } else {
+            cout << "Aoki";
+        }
+    } else {
+        cout << "Aoki";
+    }
 }
 
 int main() {
     int __ = 1;
-    scanf("%d", &__);
+    // scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

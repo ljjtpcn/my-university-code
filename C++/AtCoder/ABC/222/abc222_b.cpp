@@ -1,9 +1,15 @@
+// Problem: B - Failing Grade
+// Contest: AtCoder - Exawizards Programming Contest 2021（AtCoder Beginner
+// Contest 222） URL: https://atcoder.jp/contests/abc222/tasks/abc222_b Memory
+// Limit: 1024 MB Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
 #define pb push_back
 #define fir first
 #define sec sec
+#define inf 0x3f3f3f3f
+#define INF 0x3f3f3f3f3f3f3f3f
 using namespace std;
 // clang-format off
 typedef long long ll;
@@ -20,12 +26,20 @@ struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 const int N = 2e5 + 10;
 
 void solve() {
-    
+    int n, k;
+    cin >> n >> k;
+    int cnt = 0;
+    while (n--) {
+        int x;
+        cin >> x;
+        if (x < k) cnt++;
+    }
+    cout << cnt;
 }
 
 int main() {
     int __ = 1;
-    scanf("%d", &__);
+    // scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }
