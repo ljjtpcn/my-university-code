@@ -1,3 +1,8 @@
+// Problem: E - Digit Products
+// Contest: AtCoder - AtCoder Beginner Contest 208
+// URL: https://atcoder.jp/contests/abc208/tasks/abc208_e
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,7 +24,7 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
 void solve() {

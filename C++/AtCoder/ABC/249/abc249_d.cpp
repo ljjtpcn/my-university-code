@@ -1,3 +1,7 @@
+// Problem: D - Index Trio
+// Contest: AtCoder - Monoxer Programming Contest 2022（AtCoder Beginner Contest
+// 249） URL: https://atcoder.jp/contests/abc249/tasks/abc249_d Memory Limit:
+// 1024 MB Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +23,31 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+ll arr[N];
+map<ll, ll> mp;
 void solve() {
-    
+    ll n;
+    cin >> n;
+    for (ll i = 0; i < n; i++) {
+        cin >> arr[i];
+        mp[arr[i]]++;
+    }
+
+
+    ll sum = 0;
+    for (auto it : mp) {
+        ll x = it.fir, cnt = it.sec;
+        for (ll i = 1; i <= x / i; i++) {
+            if (x % i == 0) {
+                ll z = x / i;
+                sum += mp[i] * mp[z] * cnt * (z == i ? 1 : 2);
+            }
+        }
+    }
+    cout << sum;
 }
 
 int main() {

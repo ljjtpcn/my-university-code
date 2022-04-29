@@ -1,3 +1,8 @@
+// Problem: C - Fair Candy Distribution
+// Contest: AtCoder - AtCoder Beginner Contest 208
+// URL: https://atcoder.jp/contests/abc208/tasks/abc208_c
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,29 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+vector<ll> arr;
+vector<ll> arr2;
+map<ll, ll> mp;
 void solve() {
-    
+    ll n, k;
+    cin >> n >> k;
+    for (int i = 0; i < n; i++) {
+        int x;
+        cin >> x;
+        arr.pb(x), arr2.pb(x);
+    }
+    sort(arr.begin(), arr.end());
+
+    ll base = k / n, cur = k % n;
+    for (int i = 0; i < cur; i++) mp[arr[i]] = 1;
+    for (auto x : arr2)
+        if (mp[x])
+            cout << base + 1 << endl;
+        else
+            cout << base << endl;
 }
 
 int main() {

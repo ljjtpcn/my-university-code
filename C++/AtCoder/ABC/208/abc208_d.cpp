@@ -1,3 +1,8 @@
+// Problem: D - Shortest Path Queries 2
+// Contest: AtCoder - AtCoder Beginner Contest 208
+// URL: https://atcoder.jp/contests/abc208/tasks/abc208_d
+// Memory Limit: 1024 MB
+// Time Limit: 3000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,32 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int mod = 998244353;
+const int N = 400 + 10;
 
+int d[N][N], n, m;
 void solve() {
-    
+    cin >> n >> m;
+
+    memset(d, 0x3f, sizeof d);
+    for (int i = 1; i <= n; i++) d[i][i] = 0;
+
+    for (int i = 0; i < m; i++) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        d[a][b] = min(d[a][b], c);
+    }
+
+    ll ans = 0;
+    for (int k = 1; k <= n; k++) {
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
+                if (d[i][j] != inf) ans += d[i][j];
+            }
+        }
+    }
+    cout << ans;
 }
 
 int main() {

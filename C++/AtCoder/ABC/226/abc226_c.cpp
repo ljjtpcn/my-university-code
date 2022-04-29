@@ -1,3 +1,8 @@
+// Problem: C - Martial artist
+// Contest: AtCoder - AtCoder Beginner Contest 226
+// URL: https://atcoder.jp/contests/abc226/tasks/abc226_c
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,44 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+int t[N], k[N], n;
+vector<int> kk[N];
+int mp[N];
+ll ans;
+
+void bfs() {
+    ans += t[n];
+    queue<int> q;
+    for (auto x : kk[n]) q.push(x);
+
+    mp[n] = 1;
+    while (q.size()) {
+        auto x = q.front();
+        q.pop();
+        if (mp[x]) continue;
+        mp[x] = 1;
+        ans += t[x] + 0ll;
+        for (auto idx : kk[x])
+            if (!mp[idx]) q.push(idx);
+    }
+    cout << ans;
+}
+
 void solve() {
-    
+    cin >> n;
+    for (int i = 1; i <= n; i++) {
+        cin >> t[i] >> k[i];
+        for (int j = 0; j < k[i]; j++) {
+            int x;
+            cin >> x;
+            kk[i].pb(x);
+        }
+    }
+
+    bfs();
 }
 
 int main() {

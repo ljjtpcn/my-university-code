@@ -20,10 +20,45 @@ struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
 const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int N = 3e5 + 10;
 
+vector<pii> g;
+map<pii, int> mp; 
+int vis[N];
 void solve() {
-    
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    for(int i = 0; i < s.size() - 1; i ++){
+        if(vis[i]) continue;
+        if((s[i] == 'L' && s[i + 1] == 'R') || (s[i] == 'R' && s[i + 1] == 'L')
+        || (s[i] == 'D' && s[i + 1] == 'U') || (s[i] == 'U' && s[i + 1] == 'D'))
+        {
+            vis[i] = vis[i + 1] = 1;
+        }
+    }
+    int x = 0, y = 0;
+    mp[{0, 0}] = 1;
+    set<pii> res;
+    res.clear();
+    int i = 0;
+    for(auto c :s){
+        if(vis[i]) continue;
+        if(c == 'L'){
+            x --; 
+        }else if(c == 'R'){
+            x ++;
+        }else if(c == 'D'){
+            y --;
+        }else if(c == 'U'){
+            y ++;
+        }
+        if(mp[{x,  y}]) res.insert({x, y});
+        else mp[{x, y}] = 1;
+        i ++;
+    }
+    cout << res.size() + 1;
 }
 
 int main() {

@@ -23,12 +23,44 @@ const int mod = 1e9 + 7;
 const int N = 2e5 + 10;
 
 void solve() {
+    ll p, k;
+    cin >>p >> k;
+    if(k == 0){
+        cout << 0 <<endl;;
+        return;
+    }else if(k == 1){
+        cout << max(0ll, p - 1) <<endl;
+        return;
+    }else if(k == 2){
+        cout << min(2ll, p - 1) << endl;
+        return;
+    }
+    ll temp = p - 1;
+    string s = "";
     
+    int cnt = 0;
+    while(temp){
+        if(temp & 1) s.pb('1'), cnt ++;
+        else s.pb('0');
+        temp >>= 1;
+    }
+    reverse(s.begin(), s.end());
+    ll t = s.size() + (cnt - 1);
+    // cout << t <<"!!!!!!";
+    for(int i = s.size() - 1; i >= 1; i --){
+        if(s[i] == '1' && t > k) s[i] = '0', t -= 1;
+        if(t <= k){
+            cout << stol(s, nullptr, 2) << endl;
+            // cout << s << endl;
+            return;
+        }
+    }
+    // cout << stol(s, nullptr, 2) << endl;
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

@@ -22,13 +22,33 @@ struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 const int mod = 1e9 + 7;
 const int N = 2e5 + 10;
 
+vector<int> mp;
 void solve() {
+    string s;
+    cin >>s;
+
+    mp.resize(s.size() + 1);
+    for(int i = s.size() - 1; i >= 0; i --){
+        mp[i] = mp[i + 1];
+        if(s[i] == 'h'){
+            mp[i] = mp[i + 1] + 1;
+        }
+        // cout << mp[i] << '!';
+    }
+    ll ans = 0;
+    for(int i = 0; i < s.size(); i ++){
+        if(s[i] == 'a'){
+            ans += 1ll * mp[i] * (mp[i] - 1) / 2;  
+        }
+    }
+    cout <<ans;
     
+
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

@@ -1,3 +1,8 @@
+// Problem: 交替加乘
+// Contest: NowCoder
+// URL: https://ac.nowcoder.com/acm/contest/11225/D
+// Memory Limit: 524288 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -20,10 +25,24 @@ struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
 const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int N = 1e5 + 10;
 
+ll a[N];
 void solve() {
-    
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    sort(a + 1, a + n + 1);
+
+    ll ans = 1;
+    int max_idx = n / 2 + 1, min_idx = n / 2;
+    for (int i = 1; i <= n; i++) {
+        if (i & 1)
+            ans = ans * a[max_idx++] % mod;
+        else
+            ans = (ans + a[min_idx--]) % mod;
+    }
+    cout << ans % mod;
 }
 
 int main() {

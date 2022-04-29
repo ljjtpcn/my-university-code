@@ -23,12 +23,29 @@ const int mod = 1e9 + 7;
 const int N = 2e5 + 10;
 
 void solve() {
-    
+    string s;
+    cin >> s;
+    if(s.size() == 1|| s.back() != 'B' || s[0] != 'A'){
+        cout <<"NO\n";
+        return;
+    }
+    int a = 0, b = 0;
+    for(auto c : s){
+        if(c == 'A') a++;
+        else {
+            b++;
+            if(a < b){
+                cout << "NO\n";
+                return;
+            }
+        }
+    }
+    cout <<"YES\n";
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

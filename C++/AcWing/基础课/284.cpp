@@ -1,3 +1,8 @@
+// Problem: 石子合并
+// Contest: AcWing
+// URL: https://www.acwing.com/problem/content/284/
+// Memory Limit: 64 MB
+// Time Limit: 1000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,26 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int mod = 998244353;
+const int N = 300 + 10;
 
+int n, s[N];
+int f[N][N];
 void solve() {
-    
+    read(n);
+    for (int i = 1; i <= n; i++) read(s[i]), s[i] += s[i - 1];
+
+    for (int len = 2; len <= n; len++) {
+        for (int i = 1; i + len - 1 <= n; i++) {
+            int l = i, r = i + len - 1;
+            f[l][r] = inf;
+            for (int mid = l; mid < r; mid++) {
+                f[l][r] =
+                    min(f[l][r], f[l][mid] + f[mid + 1][r] + s[r] - s[l - 1]);
+            }
+        }
+    }
+    cout << f[1][n];
 }
 
 int main() {

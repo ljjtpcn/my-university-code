@@ -1,3 +1,9 @@
+// Problem: B - Counting Arrays
+// Contest: AtCoder - AtCoder Beginner Contest 226
+// URL: https://atcoder.jp/contests/abc226/tasks/abc226_b
+// Memory Limit: 1024 MB
+// Time Limit: 2000 ms
+
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +25,26 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+set<string> st;
 void solve() {
-    
+    int n;
+    cin >> n;
+    while (n--) {
+        int t;
+        cin >> t;
+        string s = "";
+        while (t--) {
+            string c;
+            cin >> c;
+            s += (c);
+            s += ("!");
+        }
+        st.insert(s);
+    }
+    cout << st.size();
 }
 
 int main() {

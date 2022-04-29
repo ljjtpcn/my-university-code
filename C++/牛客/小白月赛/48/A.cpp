@@ -1,3 +1,8 @@
+// Problem: 孤独的数组
+// Contest: NowCoder
+// URL: https://ac.nowcoder.com/acm/contest/11225/A
+// Memory Limit: 524288 MB
+// Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,22 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+int a[N];
 void solve() {
-    
+    int n;
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) { cin >> a[i]; }
+    for (int i = 2; i <= n; i++) {
+        if (__gcd(a[i - 1], a[i]) != 1) {
+            cout << -1;
+            return;
+        }
+    }
+    cout << 0;
 }
 
 int main() {

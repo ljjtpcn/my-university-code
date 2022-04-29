@@ -20,15 +20,25 @@ struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
 const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int N = 1e3 + 10;
 
+int arr[N];
 void solve() {
-    
+    int n;
+    cin >> n;
+    int sum = 0;
+    for(int i = 0;  i < n;  i++) {
+     cin >> arr[i];
+     sum += arr[i];   
+    }
+    sum -= n;
+    if(sum & 1) cout << "errorgorn\n";
+    else cout << "maomao90\n";
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

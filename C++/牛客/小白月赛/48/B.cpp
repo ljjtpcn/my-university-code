@@ -1,3 +1,9 @@
+// Problem: 博弈大师
+// Contest: NowCoder
+// URL: https://ac.nowcoder.com/acm/contest/11225/B
+// Memory Limit: 524288 MB
+// Time Limit: 2000 ms
+
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,16 +25,41 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int mod = 998244353;
+const int N = 3000 + 10;
+
+ull f(ull n) { return (1ull + n) * n / 2; }
 
 void solve() {
-    
+    ull x, a, b;
+    cin >> x >> a >> b;
+    ull l = 1, r = 1e9;
+    while (l < r) {
+        ull mid = l + r + 1 >> 1;
+        if (f(mid) <= x)
+            l = mid;
+        else
+            r = mid - 1;
+    }
+    ull n = l;
+    if (n & 1) {
+        if (a <= b) {
+            cout << "niumei\n";
+        } else {
+            cout << "niuniu\n";
+        }
+    } else {
+        if (a >= b) {
+            cout << "niuniu\n";
+        } else {
+            cout << "niumei\n";
+        }
+    }
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

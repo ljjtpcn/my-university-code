@@ -1,3 +1,7 @@
+// Problem: B - Perfect String
+// Contest: AtCoder - Monoxer Programming Contest 2022（AtCoder Beginner Contest
+// 249） URL: https://atcoder.jp/contests/abc249/tasks/abc249_b Memory Limit:
+// 1024 MB Time Limit: 2000 ms
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +23,24 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
+map<char, int> mp;
 void solve() {
-    
+    string s;
+    cin >> s;
+    int x = 0, d = 0;
+    for (auto c : s) {
+        if (mp[c]) cout << "No", exit(0);
+        mp[c] = 1;
+        if (c >= 'a' && c <= 'z') x = 1;
+        if (c >= 'A' && c <= 'Z') d = 1;
+    }
+    if (x && d)
+        cout << "Yes";
+    else
+        cout << "No";
 }
 
 int main() {

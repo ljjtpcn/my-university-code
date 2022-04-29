@@ -22,13 +22,34 @@ struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 const int mod = 1e9 + 7;
 const int N = 2e5 + 10;
 
+int arr[N];
 void solve() {
-    
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; i++){
+        cin >> arr[i];        
+    }
+
+    int l = 0, r = n - 1;
+    for(int i = 0; i < n - 1; i ++){
+        if(arr[i] == arr[i + 1]){
+            l = i;  
+            break;
+        }
+    }
+    for(int i = n - 1; i >= 1; i --){
+        if(arr[i] == arr[i - 1]){
+            r = i - 1;  
+            break;
+        }
+    }
+    if((l == 0 && r == n - 1) || (l == r)) cout << 0  << endl;
+    else cout << (l + 1 == r ? 1 : r - l - 1)<<endl;
 }
 
 int main() {
     int __ = 1;
-    // scanf("%d", &__);
+    scanf("%d", &__);
     while (__--) { solve(); }
     Please AC;
 }

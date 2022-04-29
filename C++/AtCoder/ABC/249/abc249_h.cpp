@@ -1,3 +1,8 @@
+// Problem: Ex - Dye Color
+// Contest: AtCoder - Monoxer Programming Contest 2022（AtCoder Beginner Contest
+// 249） URL: https://atcoder.jp/contests/abc249/tasks/abc249_h Memory Limit:
+// 1024 MB Time Limit: 3500 ms
+
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,23 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
+const int mod = 998244353;
 const int N = 2e5 + 10;
 
 void solve() {
-    
+    int a, b, c, d, e, f, x;
+    cin >> a >> b >> c >> d >> e >> f >> x;
+    int t1 = x / (c + b);
+    int ans1 = a * t1 + a * (x % (b + c));
+
+    int t2 = x / (e + f);
+    int ans2 = d * t2 + d * (x % (e + f));
+    if (ans1 > ans2)
+        cout << "Takahashi";
+    else if (ans1 == ans2)
+        cout << "Draw";
+    else
+        cout << "Aoki";
 }
 
 int main() {

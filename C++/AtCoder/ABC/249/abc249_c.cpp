@@ -1,3 +1,8 @@
+// Problem: C - Just K
+// Contest: AtCoder - Monoxer Programming Contest 2022（AtCoder Beginner Contest
+// 249） URL: https://atcoder.jp/contests/abc249/tasks/abc249_c Memory Limit:
+// 1024 MB Time Limit: 2000 ms
+
 #include <bits/stdc++.h>
 #define Please return
 #define AC 0
@@ -19,11 +24,32 @@ ll ksm(ll a, ll b, int mod){ll res = 1;while(b){if(b & 1)res = res * a % mod;a =
 struct node { int x, y, cnt; };
 struct cmp {bool operator()(node a, node b) { return a.cnt > b.cnt; }};
 // clang-format on
-const int mod = 1e9 + 7;
-const int N = 2e5 + 10;
+const int mod = 998244353;
+const int N = 1e5 + 10;
 
+string s[N];
+map<char, int> mp;
+int maxx;
 void solve() {
-    
+    int n, k;
+    cin >> n >> k;
+    for (int i = 0; i < n; i++) { cin >> s[i]; }
+
+    for (int i = 0; i < 1 << n; i++)  //进行枚举，枚举到2的n次幂
+    {
+        mp.clear();
+        int sum = 0;
+        for (int j = 0; j < n; j++) {
+            if (i & 1 << j) {
+                for (auto c : s[j]) mp[c]++;
+            }
+        }
+        for (auto t : mp) {
+            if (t.sec == k) sum++;
+        }
+        maxx = max(maxx, sum);
+    }
+    cout << maxx;
 }
 
 int main() {
