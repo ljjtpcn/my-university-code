@@ -228,3 +228,192 @@ void getPrime(int n){//筛到n
 }
 ```
 
+# 计算几何
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+const double PI = acos(-1.0);//π的较精确值
+const double eps = 1e-8; // 
+const int maxn=2e5+10;
+
+int sgn(double x) // 浮点数的比较）
+{
+    if (fabs(x) < eps)return 0;
+    else return x < 0 ? -1 : 1;
+}
+int cmp(double x, double y)  // 比较函数
+{
+    if (fabs(x - y) < eps) return 0;
+    if (x < y) return -1;
+    return 1;
+}
+struct Point //存二维坐标点
+{
+    double x, y;
+    Point() {}
+    Point(double x, double y) :x(x), y(y) {}
+    Point operator + (Point B) { return Point(x + B.x, y + B.y); }
+    Point operator - (Point B) { return Point(x - B.x, y - B.y); }
+    Point operator * (double k) { return Point(x * k, y * k); }
+    Point operator / (double k) { return Point(x / k, y / k); }
+    bool operator == (Point B) { return sgn(x - B.x) == 0 && sgn(y - B.y) == 0; }
+    bool operator<(Point B)
+    {
+        return sgn(x - B.x) < 0 || (sgn(x - B.x) == 0 && sgn(y - B.y) < 0);
+    }
+};
+struct Line {
+    Point p1, p2;
+    Line() {}
+    Line(Point p1, Point p2) :p1(p1), p2(p2) {}
+};
+/**
+基础操作
+*/
+double Dot(Point A, Point B)//点乘(内积， 点积)
+{
+    return A.x * B.x + A.y * B.y;
+}
+double Cross(Point A, Point B)//叉积（外积， 叉积）（有向面积， A逆时针至B为正面积，否则为负面积）
+{
+    return A.x * B.y - A.y * B.x;
+}
+double rotate(Point A, double angle) // 向量A顺时针旋转C角度
+{
+    return Point(A.x * cos(angle) + A.y * sin(angle), -A.x * sin(angle) + A.y * cos(angle));
+}
+
+
+double xmult(Point p1, Point p2, Point p3)//叉乘(xmult(b, v.p1, v.p2) * xmult(c, v.p1, v.p2) > eps）两点在直线同一边
+{
+    return (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
+}
+double Area(Point A, Point B, Point C)//三角形面积*2
+{
+    return Cross(B - A, C - A);
+}
+
+double dis(Point A, Point B)//两点间的距离
+{
+    return sqrt((A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y));
+}
+double Dis_point_line(Point p, Line v)//点到直线的距离
+{
+    return fabs(Cross(p - v.p1, v.p2 - v.p1)) / dis(v.p1, v.p2);
+}
+double Dis_point_seg(Point p, Line v)//点到线段的距离
+{
+    if (sgn(Dot(p - v.p1, v.p2 - v.p1)) < 0 || sgn(Dot(p - v.p2, v.p1 - v.p2)) < 0)
+        return min(dis(p, v.p1), dis(p, v.p2));
+    return Dis_point_line(p, v);
+}
+double angle(Point O, Point A, Point B) //两向量OA,OB的夹角
+{
+    return acos(Dot(A - O, B - O) / (dis(O, A) * dis(O, B)));
+}
+int Point_line_relation(Point p, Line v)//点和直线的位置关系
+{
+    //叉积（面积）判断
+    int c = sgn(Cross(p - v.p1, v.p2 - v.p1));
+    if (c < 0)return 1;//p在v的左边
+    if (c > 0)return 2;//p在v的右边
+    return 0;//p在v上
+}
+int Line_relation(Line v1, Line v2)//两条直线的位置关系
+{
+    if (sgn(Cross(v1.p2 - v1.p1, v2.p2 - v2.p1)) == 0)
+    {
+        if (Point_line_relation(v1.p1, v2) == 0)return 1;//重合
+        else return 0;//平行
+    }
+    return 2;//相交
+}
+Point Cross_point(Point a, Point b, Point c, Point d)//直线交点
+{
+    double s1 = Cross(b - a, c - a);
+    double s2 = Cross(b - a, d - a);
+    return Point(c.x * s2 - d.x * s1, c.y * s2 - d.y * s1) / (s2 - s1);
+}
+bool segment_intersection(Point a1, Point a2, Point b1, Point b2)//两线段是否相交
+{
+    double c1 = Cross(a2 - a1, b1 - a1), c2 = Cross(a2 - a1, b2 - a1);
+    double c3 = Cross(b2 - b1, a2 - b1), c4 = Cross(b2 - b1, a1 - b1);
+    return sgn(c1) * sgn(c2) <= 0 && sgn(c3) * sgn(c4) <= 0;
+}
+
+bool Point_on_seg(Point p, Line v)//点和线段的位置关系，0为不在线段上
+{
+    return sgn(Cross(p - v.p1, v.p2 - v.p1)) == 0 && sgn(Dot(p - v.p1, p - v.p2)) <= 0;
+}
+int main()
+{
+	return 0;
+}
+```
+
+## 三角形
+
+### 面积
+1. 叉积
+2. 海伦公式
+
+    $p = (a + b + c) / 2$
+
+    $s = sqrt(p * (p - a) *(p - b) * (p - c))$
+
+### 三角形四心
+1. 外心， 外接圆圆心
+
+    三边中垂线交点。到三角形三个顶点的距离相等
+
+2. 内心， 内切圆圆心
+
+    角平分线交点，到三边距离相等
+
+3. 垂心
+
+    三条垂线交点
+
+4. 重心
+
+    三条中线交点（到三角形三顶点距离的平方和最小的点， 三角形内到三边距离之积最大的点）
+
+## 普通多边形
+
+:::info
+通常按逆时针存储所有点
+:::
+
+### 定义
+1. 多边形
+
+    由在同一平面且不在同一直线上的多条线段首尾连接且不相交所组成的多边形
+
+2. 简单多边形
+
+    指除相邻边外其它边不相交的多边形
+
+3. 凸多边形
+    
+    过多边形的任意一边做一条直线， 如果其他各个顶点都在这条直线的同侧，则把这个多边形叫做凸多边形。
+
+    任意凸多边形外角和均为$360°$
+
+    任意凸多边形内角和为$(n - 2) * 180°$
+
+### 常用函数
+
+1. 求多边形面积（不一定是凸多边形）
+
+    我们可以任选一个顶点（一般选第一个顶点 ）出发，吧凸多边形分成`n - 2`个三角形，然后把面积加起来
+
+```c++
+    double polygon_area(Point p[], int n)
+    {
+        double s = 0;
+        for(int i = 1; i + 1 < n; i ++)
+            s += cross(p[i] - p[0], p[i + 1] - p[i]);
+        return s / 2;
+    }
+``` 

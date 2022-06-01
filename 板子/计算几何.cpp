@@ -1,9 +1,15 @@
+
+
+
+
+```c++
 #include<bits/stdc++.h>
 using namespace std;
 const double PI = acos(-1.0);//π的较精确值
-const double eps = 1e-8;
-const int maxn=1e5+10;
-int sgn(double x)
+const double eps = 1e-8; // 
+const int maxn=2e5+10;
+
+int sgn(double x) // 浮点数的比较）
 {
     if (fabs(x) < eps)return 0;
     else return x < 0 ? -1 : 1;
@@ -96,7 +102,7 @@ bool segment_intersection(Point a1, Point a2, Point b1, Point b2)//两线段是�
     double c3 = Cross(b2 - b1, a2 - b1), c4 = Cross(b2 - b1, a1 - b1);
     return sgn(c1) * sgn(c2) <= 0 && sgn(c3) * sgn(c4) <= 0;
 }
- 
+
 bool Point_on_seg(Point p, Line v)//点和线段的位置关系，0为不在线段上
 {
     return sgn(Cross(p - v.p1, v.p2 - v.p1)) == 0 && sgn(Dot(p - v.p1, p - v.p2)) <= 0;
@@ -104,4 +110,8 @@ bool Point_on_seg(Point p, Line v)//点和线段的位置关系，0为不在线�
 int main()
 {
 	return 0;
-} 
+} 	
+```
+
+
+
